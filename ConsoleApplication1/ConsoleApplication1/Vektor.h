@@ -38,21 +38,30 @@ public:
   }
   void popback() {
     if (head != 0) {
-      head = head->next;
-      delete head->last;
-      head->last = 0;
+      if (m_size > 1) {
+        head = head->next;
+        delete head->last;
+        head->last = 0;
+      }
+      else if (m_size == 1) {
+        delete head;
+        head = 0;
+        tail = 0;
+      }
       --m_size;
     }
   }
 
   T at(int pos) {
-    phelp = tail;
-    for (int i = 0; i < m_size; ++i) {
-      if (pos == phelp->id) {
-        return phelp->m_content;
-      }
-      if (i < m_size - 1) {
-        phelp = phelp->last;
+    if (m_size > 0) {
+      phelp = tail;
+      for (int i = 0; i < m_size; ++i) {
+        if (pos == phelp->id) {
+          return phelp->m_content;
+        }
+        if (i < m_size - 1) {
+          phelp = phelp->last;
+        }
       }
     }
   }
@@ -70,6 +79,11 @@ public:
       do {
         pushback(0);
       } while (size > m_size);
+    }
+  }
+  void clear() {
+    while (head != 0) {
+      popback();
     }
   }
 };

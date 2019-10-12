@@ -32,6 +32,13 @@ int main()
   for (int i = 0; i < vektor->size(); i++) {
     std::cout << vektor->at(i) << std::endl;
   }
+
+  std::cout << std::endl;
+
+  vektor->clear();
+  for (int i = 0; i < vektor->size(); i++) {
+    std::cout << vektor->at(i) << std::endl;
+  }
   int a;
   std::cin >> a;
 
