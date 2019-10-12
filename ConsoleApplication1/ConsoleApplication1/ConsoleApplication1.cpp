@@ -1,10 +1,26 @@
 #include "pch.h"
 #include <iostream>
 #include "Vektor.h"
-int main()
-{
+#include <chrono>
+#include <string> 
 
+int main()
+{  
   Vektor<int> *vektor = new Vektor<int>();
+
+  auto start = std::chrono::steady_clock::now();
+
+  vektor->pushback(1);
+
+  auto end = std::chrono::steady_clock::now();
+
+  std::cout << "Elapsed time in nanoseconds : "
+    << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()
+    << " ns" << std::endl;
+  vektor->popback();
+  int a;
+  std::cin >> a;
+
   for (int i = 0; i < 5; i++) {
     vektor->pushback(i);
   }
@@ -39,8 +55,14 @@ int main()
   for (int i = 0; i < vektor->size(); i++) {
     std::cout << vektor->at(i) << std::endl;
   }
-  int a;
-  std::cin >> a;
+ 
 
+  Vektor<std::string> *vektor2 = new Vektor<std::string>();
+  vektor2->pushback("HELLO WORLD");
+  std::cout << vektor2->at(0);
+  
+  std::cin >> a;
+  delete vektor2;
+  delete vektor;
 }
 

@@ -77,7 +77,7 @@ public:
     }
     if (size > m_size) {
       do {
-        pushback(0);
+        pushback(NULL);
       } while (size > m_size);
     }
   }
